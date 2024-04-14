@@ -3,15 +3,14 @@ on:
   push:
     branches: [ main ]
 jobs:
-  build:
+  test_codebase:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run a one-line script
-        run: echo Hello, test world!
-  teardown:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Goodbye
-        run: echo goodbye everyone.
+      - name: Install pip
+        run: python3 -m pip install --upgrade pip
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run test
+        run: pytest test_app.py
 
